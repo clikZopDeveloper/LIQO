@@ -41,7 +41,6 @@ public class ApiController {
         progressView = new ProgressView(context);
     }
 
-
     @SuppressLint("CheckResult")
     public void getApiCall(final String tag, String parm) {
         Single<JsonElement> call = apiClient.getCall(ApiContants.BaseUrl + tag + parm);
@@ -52,13 +51,11 @@ public class ApiController {
                     @Override
                     public void onSuccess(JsonElement jsonElement) {
                         BaseResponseBean baseResponse = getConvertIntoModel(jsonElement.toString(), BaseResponseBean.class);
-
                         if (baseResponse.getError()==false) {
                             responseListner.success(tag, jsonElement);
                         } else {
                             responseListner.failure(tag, baseResponse.getMsg());
                         }
-
                     }
 
                     @Override
@@ -154,8 +151,6 @@ public class ApiController {
 
     @SuppressLint("CheckResult")
     public void makeCallMultipart(final String tag, MultipartBody parm) {
-
-
         Single<JsonElement> call = apiClient.makeMutlipartCall(ApiContants.BaseUrl + tag, parm);
 
         call.subscribeOn(Schedulers.io())
@@ -195,4 +190,5 @@ public class ApiController {
                 .create();
         return gson.fromJson(gsonStr, modelClass);
     }
+
 }

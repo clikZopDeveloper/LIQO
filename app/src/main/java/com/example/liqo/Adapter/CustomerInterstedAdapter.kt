@@ -74,10 +74,12 @@ class CustomerInterstedAdapter(var context: Activity,var way:String, var list: L
             Log.d("zxczxc", data.toString())
             rvClickListner.clickPos(data, list[position].categoryId)
         }
+        if (way.equals("Detail")){
+             holder.itemView.setOnClickListener {
+           rvClickListner.clickPos(data,list[position].categoryId)
+       }
+        }
 
-       /* holder.itemView.setOnClickListener {
-            rvClickListner.clickPos("",list[position].categoryId)
-        }*/
     }
 
     override fun getItemCount(): Int {

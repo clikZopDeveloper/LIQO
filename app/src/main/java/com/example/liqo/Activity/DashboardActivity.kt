@@ -87,8 +87,10 @@ ConnectivityListener.ConnectivityReceiverListener {
         apiGetStatus()
         }
 
-     //   window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
-       // startService(Intent(this, LocationService::class.java))
+        if (SalesApp.isEnableScreenshort==true){
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+        // startService(Intent(this, LocationService::class.java))
         //   binding.appBarMain.appbarLayout.switchDayStart="Day Start"
         binding.appBarMain.appbarLayout.ivLogout.setOnClickListener {
             apiCallLogout()

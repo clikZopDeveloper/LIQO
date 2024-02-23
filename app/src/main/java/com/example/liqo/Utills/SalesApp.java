@@ -45,7 +45,7 @@ public class SalesApp extends Application implements Application.ActivityLifecyc
     public static ArrayList<SourceBean.Data> sourceList = new ArrayList<>();
     public static ArrayList<GetCustomerMobListBean.Data> custMobList = new ArrayList<>();
     public static ArrayList<GetAllStatusBean.Data> allStatusList = new ArrayList<>();
-
+    public static Boolean isEnableScreenshort = false;
     @Override
     public void onCreate() {
         super.onCreate();

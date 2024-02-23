@@ -32,7 +32,10 @@ class TelecallerAdapter(var context: Activity, var list: List<TelecalerDashboard
 
         holder.tvTitle.text= list[position].status.toString()
        // holder.tvSubTitle.text= list[position].subTitle
-        holder.tvAmount.text= list[position].value.toString()
+        if (list[position].value!=null){
+            holder.tvAmount.text= list[position].value.toString()
+        }
+
     //    holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
       /*  if ("Retailer"=="Retailer"){

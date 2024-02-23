@@ -25,6 +25,7 @@ import com.example.liqo.Model.LoginBean
 import com.example.liqo.R
 import com.example.liqo.Utills.GeneralUtilities
 import com.example.liqo.Utills.PrefManager
+import com.example.liqo.Utills.SalesApp
 import com.example.liqo.Utills.Utility
 import com.example.liqo.databinding.ActivityLoginBinding
 
@@ -47,7 +48,9 @@ class LoginActivity : AppCompatActivity(), ApiResponseListner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-     //   window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (SalesApp.isEnableScreenshort==true){
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         //  loginViewModel = ViewModelProvider(this, ViewModelFactory(this)).get(LoginViewModel::class.java )

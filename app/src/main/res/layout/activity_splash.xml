@@ -23,8 +23,8 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
         <ImageView
             android:id="@+id/imagea"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/_170dp"
+            android:layout_height="140dp"
           android:padding="@dimen/_10dp"
             android:src="@drawable/app_logo"
             app:layout_constraintStart_toStartOf="parent"

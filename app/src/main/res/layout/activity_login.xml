@@ -23,6 +23,10 @@
             android:layout_marginTop="@dimen/_20dip"
             android:layout_marginVertical="@dimen/_20dip"
             android:src="@drawable/app_logo"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,7 +60,7 @@
             android:paddingHorizontal="@dimen/_6dp"
             android:textSize="@dimen/_14sp"
             android:singleLine="true"/>
-   <!--     android:text="@={loginViewModel.mobileNo}"-->
+        <!--     android:text="@={loginViewModel.mobileNo}"-->
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvForgotPass"
@@ -65,7 +69,7 @@
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
             android:text="Forgot Password"
-           android:visibility="gone"
+            android:visibility="gone"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/_10dp"
             android:layout_marginEnd="@dimen/_10dp"
@@ -88,7 +92,7 @@
             android:fontFamily="@font/roboto_bold"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp" />
-       <!-- android:onClick="@{()->loginViewModel.submit()}"-->
+        <!-- android:onClick="@{()->loginViewModel.submit()}"-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -124,6 +128,8 @@
 
         </LinearLayout>
     </LinearLayout>
+</ScrollView>
+
     </LinearLayout>
 
 </layout>

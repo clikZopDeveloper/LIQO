@@ -62,7 +62,6 @@ class FirbaseOTPAuthActivity : AppCompatActivity() {
         startSmsRetriever()
       //  callFirebaseOTP()
 
-
         // [END phone_auth_callbacks]
     }
 
@@ -128,6 +127,7 @@ class FirbaseOTPAuthActivity : AppCompatActivity() {
             }
         }
     }
+
     // [START on_start_check_user]
     override fun onStart() {
         super.onStart()
@@ -135,6 +135,7 @@ class FirbaseOTPAuthActivity : AppCompatActivity() {
     //    val currentUser = auth.currentUser
    //     updateUI(currentUser)
     }
+
     // [END on_start_check_user]
 
     private fun startPhoneNumberVerification(phoneNumber: String) {
@@ -199,13 +200,12 @@ class FirbaseOTPAuthActivity : AppCompatActivity() {
     // [END sign_in_with_phone]
 
     private fun updateUI(user: FirebaseUser? = auth.currentUser) {
+
     }
 
     companion object {
         private const val TAG = "PhoneAuthActivity"
     }
-
-
 
     private fun startSmsRetriever() {
         val client = SmsRetriever.getClient(this)
@@ -232,4 +232,5 @@ class FirbaseOTPAuthActivity : AppCompatActivity() {
             }
         }
     }
+
 }

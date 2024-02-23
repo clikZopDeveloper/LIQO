@@ -202,8 +202,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
                 )
 
                 if (salesmanDashboardBean.error == false) {
-
-
                     handleRcDashboard(salesmanDashboardBean.data.customerData)
                    if (salesmanDashboardBean.data.weeklyData.size>0){
                        binding.idBarChart.visibility=View.VISIBLE
@@ -211,12 +209,9 @@ class HomeFragment : Fragment(), ApiResponseListner {
                    }else{
                        binding.idBarChart.visibility=View.GONE
                    }
-
-                }
-                else{
+                }else{
                     Toast.makeText(activity, salesmanDashboardBean.msg, Toast.LENGTH_SHORT).show()
                 }
-
             }
 
             if (tag == ApiContants.getDashboardTelecaller) {
@@ -227,11 +222,12 @@ class HomeFragment : Fragment(), ApiResponseListner {
 
                 if (telecalerDashBean.error == false) {
 /*
-                    if (telecalerDashBean.data.customerData.get(0).totalCustomer != null) {
+                        if (telecalerDashBean.data.customerData.get(0).totalCustomer != null) {
                         totalCustomer = telecalerDashBean.data.customerData.get(0).totalCustomer
                     } else if (telecalerDashBean.data.customerData.get(0).totalVisitor != null) {
                         totalVisitor = telecalerDashBean.data.customerData.get(0).totalVisitor
                     }*/
+
                     binding.tvTitleTotatl.setText(telecalerDashBean.data.totalLeads.status.toString())
                     binding.tvTitleTotatlVal.setText(telecalerDashBean.data.totalLeads.value.toString())
                     handleRcDashboard(telecalerDashBean.data.customerData)

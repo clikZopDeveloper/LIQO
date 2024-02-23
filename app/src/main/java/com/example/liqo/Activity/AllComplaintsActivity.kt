@@ -73,10 +73,13 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
     var file2: File? = null
     var activity: Activity = this
     val imgList: MutableList<File> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_all_complaints)
-      //  window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (SalesApp.isEnableScreenshort==true){
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         myReceiver = ConnectivityListener()
 
@@ -528,7 +531,6 @@ class AllComplaintsActivity : AppCompatActivity(), ApiResponseListner,
         // Start the LocationService when the app is closed
        // startService(Intent(this, LocationService::class.java))
     }
-
 
     fun ency(){
         val masterKey: MasterKey = MasterKey.Builder(this)

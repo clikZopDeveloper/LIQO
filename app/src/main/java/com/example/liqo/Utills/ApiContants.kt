@@ -58,7 +58,7 @@ public class ApiContants {
         const val getCustomer = "get-customers"
         const val getUpdateAllocateRequest = "update-allocation-request"
         const val getUpdateComplaint = "update-complaint"
-        const val getLocationUpdate = "location-update"
+        const val getLocationUpdate = "update-location"
         const val getCustomerData = "get-customer-data"
         const val getUpdateCustomer = "update-customer"
         const val getCustTelecaller = "get-customers-telecaller"
@@ -67,6 +67,9 @@ public class ApiContants {
         const val getDashboardTelecaller = "dashboard-telecaller"
         const val getCustomerMobList = "get-customers-list"
         const val getUpdateStatus = "update-status"
+        const val getConvertInterestedToPurchased = "convert-interested-to-purchased"
+        const val getUpdateCustomerCategory = "update-customer-category"
+
 
 
         fun callPGURL(context: Context, url: String) {

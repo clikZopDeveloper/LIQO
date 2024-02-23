@@ -791,6 +791,15 @@ public class GeneralUtilities {
             e.printStackTrace();
         }
     }
+    public static  void makeCall(Context context, String mob) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + mob));
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "Unable to call at this time", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public static void showDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);

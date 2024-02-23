@@ -64,7 +64,9 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_customer)
-        // window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (SalesApp.isEnableScreenshort==true){
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         myReceiver = ConnectivityListener()
 
@@ -389,7 +391,10 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
                 val name=SalesApp.custMobList.get(i).phone+"/"+ SalesApp.custMobList.get(i).name
                 if (name.equals(parent.getItemAtPosition(position))) {
                     Log.d("StateID", SalesApp.custMobList.get(i).id.toString())
-                    apiCustomerDetail(SalesApp.custMobList.get(i).id.toString())
+                  //  apiCustomerDetail(SalesApp.custMobList.get(i).id.toString())
+                    startActivity(Intent(this,CustomerDetailActivity::class.java).putExtra("cust_ID",SalesApp.custMobList.get(i).id.toString()))
+                finish()
+                //cust_ID
                 }
             }
         })

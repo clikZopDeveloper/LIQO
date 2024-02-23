@@ -32,7 +32,9 @@ class SplashActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLi
     //    setContentView(R.layout.activity_splash)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-     //   window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        if (SalesApp.isEnableScreenshort==true){
+            window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         myReceiver = ConnectivityListener()
@@ -46,7 +48,6 @@ class SplashActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLi
             if (PrefManager.getString(ApiContants.AccessToken, "") != "") {
                 GeneralUtilities.launchActivity(this, DashboardActivity::class.java)
                 finishAffinity()
-
             } else {
                 GeneralUtilities.launchActivity(this, LoginActivity::class.java)
                 finishAffinity()
