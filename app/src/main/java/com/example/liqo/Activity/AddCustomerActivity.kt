@@ -84,7 +84,6 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
         val hour: Int = calendar!!.get(Calendar.HOUR_OF_DAY)
         val min: Int = calendar!!.get(Calendar.MINUTE)
 
-
         //   callCityListAdapter()
         if (way.equals("AddCustomer")) {
             binding.igToolbar.tvTitle.text = "Add Customer/Visitor"
@@ -92,7 +91,6 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
 
         } else {
             //      binding.igToolbar.tvTitle.text = "Update Customer"
-
             intent.getStringExtra("cust_ID")?.let { apiCustomerDetail(it) }
             custID = intent.getStringExtra("cust_ID")!!
 
@@ -104,7 +102,12 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
         setState()
         setSourceData()
         typeMode()
-        setSearchNum()
+        if (PrefManager.getString(ApiContants.Role,"").equals("telecaller")){
+
+        }else{
+            setSearchNum()
+        }
+
 
         binding.apply {
 
@@ -206,9 +209,16 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
         apiClient = ApiController(activity, this)
         val params = Utility.getParmMap()
         params["state"] = stateName
-
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.getCity, params)
+    }
+    fun apiSubCategory(catID: String) {
+        SalesApp.isAddAccessToken = true
+        apiClient = ApiController(activity, this)
+        val params = Utility.getParmMap()
+        params["category_id"] = catID
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.getSubCategory, params)
     }
 
     fun setSourceData() {
@@ -292,6 +302,13 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
                         binding.rcPurchase.visibility = View.VISIBLE
                     }
 
+                    if (PrefManager.getString(ApiContants.Role,"").equals("telecaller")){
+                        binding.tvPurchaseCat.visibility = View.GONE
+                        binding.rcPurchase.visibility = View.GONE
+                        binding.tvIntersetedCat.visibility = View.GONE
+                        binding.rcInterseted.visibility = View.GONE
+                        binding.layoutCategory.visibility = View.GONE
+                    }
                     /*     for (custCat in customrDetailBean.data.customerPurchasedCategory) {
                              for (i in 0 until customrDetailBean.data.customerPurchasedCategory.size) {
                                  if (custCat.categoryId.equals(catList?.get(i)?.id)){
@@ -353,12 +370,23 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
                     CategoryBean::class.java
                 )
                 if (categoryBean.error == false) {
-                    catList = categoryBean.data
-                    CatIntersetList(categoryBean.data)
-                    CatPurchaseList(categoryBean.data)
+                  //  catList = categoryBean.data
+                    Log.d("asdasd",Gson().toJson(categoryBean.data))
+                    setCategory(categoryBean.data)
+
                 }
             }
+            if (tag == ApiContants.getSubCategory) {
+                val subCatBean = apiClient.getConvertIntoModel<SubCatBean>(
+                    jsonElement.toString(),
+                    SubCatBean::class.java
+                )
+                if (subCatBean.error == false) {
+                        CatIntersetList(subCatBean.data)
+                        CatPurchaseList(subCatBean.data)
+                }
 
+            }
         } catch (e: Exception) {
             Log.d("error>>", e.localizedMessage)
         }
@@ -367,7 +395,6 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
 
     override fun failure(tag: String?, errorMessage: String) {
         apiClient.progressView.hideLoader()
-
         Utility.showSnackBar(activity, errorMessage)
         Log.d("error", errorMessage)
 
@@ -426,7 +453,7 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
         // rvMyAcFiled.isNestedScrollingEnabled = false
     }
 
-    fun CatIntersetList(data: List<CategoryBean.Data>) {
+    fun CatIntersetList(data: List<SubCatBean.Data>) {
         binding.rcInterseted.layoutManager = GridLayoutManager(this,3)
         var mAdapter = CategoryAdapter(this, data, object :
             RvListClickListner {
@@ -439,7 +466,7 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
 
     }
 
-    fun CatPurchaseList(data: List<CategoryBean.Data>) {
+    fun CatPurchaseList(data: List<SubCatBean.Data>) {
         binding.rcPurchase.layoutManager = GridLayoutManager(this,3)
         var mAdapter = CategoryAdapter(this, data, object :
             RvListClickListner {
@@ -477,6 +504,33 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
             setState()
             apiCity(binding.stateselector.text.toString())
         })
+    }
+
+    fun setCategory(data: List<CategoryBean.Data>) {
+        val state = arrayOfNulls<String>(data.size)
+        for (i in data.indices) {
+            state[i] = data.get(i).name
+        }
+
+        val adapte1: ArrayAdapter<String?>
+        adapte1 = ArrayAdapter(
+            this@AddCustomerActivity,
+            android.R.layout.simple_list_item_1,
+            state
+        )
+        binding.statCat.setAdapter(adapte1)
+        binding.statCat.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
+        Log.d("xcvxcvc", Gson().toJson(data.get(position).name))
+        for (i in data.indices) {
+            if (data.get(i).name.equals(parent.getItemAtPosition(position))) {
+                Log.d("StateID", data.get(i).id.toString())
+                setCategory(data)
+                apiSubCategory( data.get(i).id.toString())
+            }
+        }
+    })
+    adapte1.notifyDataSetChanged()
+
     }
 
     fun ClickPicCamera(CAMERA_PERMISSION_CODE: Int) {

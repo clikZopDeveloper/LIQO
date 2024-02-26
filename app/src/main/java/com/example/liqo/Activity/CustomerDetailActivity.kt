@@ -18,6 +18,7 @@ import com.example.liqo.ApiHelper.ApiResponseListner
 import com.example.liqo.Model.CategoryBean
 import com.example.liqo.Model.ConertIntersetdToPurchase
 import com.example.liqo.Model.CustomerDetailBean
+import com.example.liqo.Model.SubCatBean
 import com.example.liqo.R
 import com.example.liqo.Utills.*
 
@@ -25,6 +26,7 @@ import com.example.liqo.databinding.ActivityCustDetailBinding
 
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.stpl.antimatter.Utils.ApiContants
 
@@ -33,6 +35,7 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
     ConnectivityListener.ConnectivityReceiverListener {
     private lateinit var binding: ActivityCustDetailBinding
     private lateinit var apiClient: ApiController
+    private lateinit var rcPurchase: RecyclerView
     var myReceiver: ConnectivityListener? = null
     private var catPurchaseListID: MutableList<Any?>? = null
     private var catIntrsetedListID: MutableList<Any?>? = null
@@ -84,7 +87,14 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         apiClient.getApiPostCall(ApiContants.getCustomerData, params)
 
     }
-
+    fun apiSubCategory(catID: String) {
+        SalesApp.isAddAccessToken = true
+        apiClient = ApiController(activity, this)
+        val params = Utility.getParmMap()
+        params["category_id"] = catID
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.getSubCategory, params)
+    }
     fun apiConvertInterestedToPurchased(cust_id: String, cat_id: String) {
         SalesApp.isAddAccessToken = true
         apiClient = ApiController(this, this)
@@ -119,19 +129,20 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
         val radioGroup = dialog.findViewById<RadioGroup>(R.id.radioGroup) as RadioGroup
         val btnSubmit = dialog.findViewById<TextView>(R.id.btnSubmit) as TextView
-        val rcPurchase = dialog.findViewById<RecyclerView>(R.id.rcPurchase) as RecyclerView
+         rcPurchase = dialog.findViewById<RecyclerView>(R.id.rcPurchase) as RecyclerView
+        val statCat = dialog.findViewById<AutoCompleteTextView>(R.id.statCat) as AutoCompleteTextView
 
         ivClose.setOnClickListener {  builder.dismiss() }
         btnSubmit.setOnClickListener {
             builder.dismiss()
             apiUpdateCategory(custID,catPurchaseListID.toString())
         }
+        setCategory(catList!!,statCat)
 
-        CatPurchaseList(catList!!,rcPurchase)
         typeCatMode(radioGroup)
 
-
     }
+
     fun typeCatMode(radioGroup: RadioGroup) {
         radioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
@@ -145,7 +156,7 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         })
     }
 
-    fun CatIntersetList(data: List<CategoryBean.Data>) {
+    fun CatIntersetList(data: List<SubCatBean.Data>) {
         binding.rcInterseted.layoutManager = GridLayoutManager(this,3)
         var mAdapter = CategoryAdapter(this, data, object :
             RvListClickListner {
@@ -158,7 +169,7 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
 
     }
 
-    fun CatPurchaseList(data: List<CategoryBean.Data>, rcPurchase: RecyclerView) {
+    fun CatPurchaseList(data: List<SubCatBean.Data>) {
         rcPurchase.layoutManager = GridLayoutManager(this,3)
         var mAdapter = CategoryAdapter(this, data, object :
             RvListClickListner {
@@ -251,6 +262,31 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
 
     }
 
+    fun setCategory(data: List<CategoryBean.Data>, statCat: AutoCompleteTextView) {
+        val state = arrayOfNulls<String>(data.size)
+        for (i in data.indices) {
+            state[i] = data.get(i).name
+        }
+        val adapte1: ArrayAdapter<String?>
+        adapte1 = ArrayAdapter(
+            this@CustomerDetailActivity,
+            android.R.layout.simple_list_item_1,
+            state
+        )
+        statCat.setAdapter(adapte1)
+        statCat.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
+            Log.d("xcvxcvc", Gson().toJson(data.get(position).name))
+            for (i in data.indices) {
+                if (data.get(i).name.equals(parent.getItemAtPosition(position))) {
+                    Log.d("StateID", data.get(i).id.toString())
+                    setCategory(data, statCat)
+                    apiSubCategory( data.get(i).id.toString())
+                }
+            }
+        })
+        adapte1.notifyDataSetChanged()
+    }
+
     override fun success(tag: String?, jsonElement: JsonElement?) {
         try {
             apiClient.progressView.hideLoader()
@@ -323,7 +359,16 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
 
                 }
             }
+            if (tag == ApiContants.getSubCategory) {
+                val subCatBean = apiClient.getConvertIntoModel<SubCatBean>(
+                    jsonElement.toString(),
+                    SubCatBean::class.java
+                )
+                if (subCatBean.error == false) {
+                    CatPurchaseList(subCatBean.data)
+                }
 
+            }
         } catch (e: Exception) {
             Log.d("error>>", e.localizedMessage)
         }
@@ -333,7 +378,6 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         apiClient.progressView.hideLoader()
         Utility.showSnackBar(this, errorMessage)
     }
-
 
     override fun onStart() {
         super.onStart()

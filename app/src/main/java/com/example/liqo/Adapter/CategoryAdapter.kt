@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.liqo.R
 import com.example.liqo.Model.AllContactListBean
 import com.example.liqo.Model.CategoryBean
+import com.example.liqo.Model.SubCatBean
 import com.example.liqo.Utills.RvListClickListner
 
 import com.example.liqo.Utills.RvStatusClickListner
 import com.google.gson.Gson
 
 
-class CategoryAdapter(var context: Activity, var list: List<CategoryBean.Data>, var rvClickListner: RvListClickListner) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>(){
+class CategoryAdapter(var context: Activity, var list: List<SubCatBean.Data>, var rvClickListner: RvListClickListner) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>(){
     private val data = mutableListOf<Int>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder { // infalte the item Layout
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
@@ -36,7 +37,7 @@ class CategoryAdapter(var context: Activity, var list: List<CategoryBean.Data>, 
 
 
         holder.tvName.text= list[position].name
-        holder.tvDate.text= list[position].createdAt.toString()
+        holder.tvDate.text= list[position].careatedAt.toString()
         holder.ivCheck.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 data.add(list[position].id)

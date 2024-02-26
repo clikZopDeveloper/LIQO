@@ -35,7 +35,7 @@ class CustomerPurchaseAdapter(var context: Activity,var way:String, var list: Li
         holder.tvAdd.visibility = View.VISIBLE*/
 
 
-        holder.tvCatName.text= list[position].categoryName
+        holder.tvCatName.text= list[position].name
       //  holder.tvDate.text= list[position].careatedAt.toString()
 
        // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
@@ -61,13 +61,13 @@ class CustomerPurchaseAdapter(var context: Activity,var way:String, var list: Li
 
         holder.ivCheck.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                data.add(list[position].categoryId)
+                data.add(list[position].id)
             } else {
-                data.remove(list[position].categoryId)
+                data.remove(list[position].id)
             }
 
             Log.d("zxczxc", Gson().toJson(data))
-            rvClickListner.clickPos(data, list[position].categoryId)
+            rvClickListner.clickPos(data, list[position].id)
         }
         /*holder.itemView.setOnClickListener {
             rvClickListner.clickPos("",list[position].categoryId)

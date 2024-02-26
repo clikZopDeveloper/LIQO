@@ -24,81 +24,81 @@ data class CustomerDetailBean(
         val leadHistory: List<LeadHistory>
     ) {
         data class CustomerInterestedCategory(
-            @SerializedName("category_id")
-            val categoryId: Int, // 1
-            @SerializedName("category_name")
-            val categoryName: String, // AC
+            @SerializedName("id")
+            val id: Int, // 2
             @SerializedName("interested_status")
-            val interestedStatus: Int // 1
+            val interestedStatus: Int, // 1
+            @SerializedName("name")
+            val name: String // AC - 2.5 Ton
         )
 
         data class CustomerPurchasedCategory(
-            @SerializedName("category_id")
-            val categoryId: Int, // 1
-            @SerializedName("category_name")
-            val categoryName: String, // AC
+            @SerializedName("id")
+            val id: Int, // 1
+            @SerializedName("name")
+            val name: String, // AC - 1 Ton
             @SerializedName("purchased_status")
-            val purchasedStatus: Int // 0
+            val purchasedStatus: Int // 1
         )
 
         data class Customers(
             @SerializedName("address")
-            val address: String, // sfnef
+            val address: String, // address
             @SerializedName("allocated_date")
             val allocatedDate: Any, // null
             @SerializedName("city")
-            val city: String, // Barpeta
+            val city: String, // Patiala
             @SerializedName("converted")
             val converted: Int, // 0
             @SerializedName("converted_date")
             val convertedDate: String, // 0000-00-00
             @SerializedName("created_at")
-            val createdAt: String, // 2024-02-21 11:15:47
+            val createdAt: String, // 2024-02-23 15:01:37
             @SerializedName("customer_type")
             val customerType: String, // visitor
             @SerializedName("doa")
-            val doa: String, // 2024-02-25
+            val doa: String, // 0000-00-00
             @SerializedName("dob")
-            val dob: String, // 2024-02-21
+            val dob: String, // 0000-00-00
             @SerializedName("email")
-            val email: String, // yash@gmail.com
+            val email: String, // vaibhav@gmail.com
             @SerializedName("id")
-            val id: Int, // 3
+            val id: Int, // 7
             @SerializedName("is_allocated")
             val isAllocated: Int, // 0
             @SerializedName("name")
-            val name: String, // yash
+            val name: String, // vaibhav
             @SerializedName("phone")
-            val phone: String, // 8982652582
+            val phone: String, // 9675559235
             @SerializedName("remarks")
-            val remarks: String,
+            val remarks: String, // remarks
             @SerializedName("remind_date")
             val remindDate: Any, // null
             @SerializedName("remind_time")
             val remindTime: Any, // null
             @SerializedName("source")
-            val source: String, // WhatsApp
+            val source: String, // Facebook
             @SerializedName("staff_id")
-            val staffId: Int, // 3
+            val staffId: Int, // 2
             @SerializedName("state")
-            val state: String, // Assam
+            val state: String, // Punjab
             @SerializedName("status")
-            val status: Int, // 0
+            val status: Int, // 1
             @SerializedName("updated_at")
-            val updatedAt: String, // 2024-02-21 11:44:32
+            val updatedAt: String, // 2024-02-26 13:45:27
             @SerializedName("user_id")
-            val userId: Int, // 3
+            val userId: Int, // 2
             @SerializedName("whatsapp")
-            val whatsapp: String // 5894591595
+            val whatsapp: String // 9675539898
         )
 
         data class LeadComment(
             @SerializedName("created_at")
-            val createdAt: String, // 2024-02-21 11:15:47
+            val createdAt: String, // 2024-02-23 15:01:37
             @SerializedName("id")
-            val id: Int, // 3
+            val id: Int, // 8
             @SerializedName("lead_id")
-            val leadId: Int, // 3
+            val leadId: Int, // 7
             @SerializedName("remarks")
             val remarks: String, // New Lead
             @SerializedName("remind_date")
@@ -110,12 +110,12 @@ data class CustomerDetailBean(
             @SerializedName("updated_at")
             val updatedAt: Any, // null
             @SerializedName("user_id")
-            val userId: Int // 3
+            val userId: Int // 2
         )
 
         data class LeadHistory(
             @SerializedName("interested_category")
-            val interestedCategory: String, // AC
+            val interestedCategory: String,
             @SerializedName("store_name")
             val storeName: String // Panchkula
         )

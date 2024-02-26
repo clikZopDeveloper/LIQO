@@ -36,7 +36,7 @@ class CustTelecallerAdapter(var context: Activity, var list: List<CustmerTelecal
         holder.tvQty.background = RoundView(Color.TRANSPARENT, RoundView.getRadius(20f), true, R.color.orange)
         holder.tvOff.background = RoundView(context.resources.getColor(R.color.orange), RoundView.getRadius(20f))
         holder.tvAdd.visibility = View.VISIBLE*/
-
+holder.ivEditLead.visibility=View.VISIBLE
         holder.tvName.text = list[position].name
         holder.tvMobile.text = list[position].phone
         holder.tvWhatsapp.text = list[position].whatsapp
@@ -53,16 +53,22 @@ class CustTelecallerAdapter(var context: Activity, var list: List<CustmerTelecal
         holder.tvSource.text = list[position].source.toString()
        // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
-      /*  if ("Retailer"=="Retailer"){
-      //      holder.itemView.visibility=View.GONE
-        }*/
-
    /*     Glide.with(context)
             .load(ApiContants.ImgBaseUrl+list[position].imgUrl)
             .into(holder.ivImage)*/
         holder.itemView.setOnClickListener {
             rvClickListner.clickPos("",list[position].id)
         }
+
+        holder.ivEditLead.setOnClickListener {
+            context.startActivityForResult(
+                Intent(context, AddCustomerActivity::class.java)
+                    .putExtra("custResponse",list[position])
+                    .putExtra("way","UpdateCustomer")
+                    .putExtra("cust_ID",list[position].id.toString())
+                ,101  )
+        }
+
         holder.ivuUpdate.setOnClickListener {
             if (PrefManager.getString(ApiContants.Role,"").equals("telecaller")){
                 context.startActivityForResult(
@@ -96,6 +102,7 @@ class CustTelecallerAdapter(var context: Activity, var list: List<CustmerTelecal
         val tvCustomerType: TextView = itemview.findViewById(R.id.tvCustomerType)
         val tvAddress: TextView = itemview.findViewById(R.id.tvAddress)
         val tvCity: TextView = itemview.findViewById(R.id.tvCity)
+        val ivEditLead: TextView = itemview.findViewById(R.id.ivEditLead)
         val tvState: TextView = itemview.findViewById(R.id.tvState)
         val tvRemark: TextView = itemview.findViewById(R.id.tvRemark)
         val tvSource: TextView = itemview.findViewById(R.id.tvSource)

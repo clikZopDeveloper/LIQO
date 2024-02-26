@@ -391,7 +391,17 @@
                     android:fontFamily="@font/roboto_bold"
                     android:textSize="@dimen/_14sp"
                     android:textColor="@color/black" />
-
+                <TextView
+                    android:id="@+id/ivEditLead"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_round_shape_white"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Lead Edit"
+                    android:textColor="@color/white"
+                    android:padding="@dimen/_4dip"
+                    android:layout_marginStart="@dimen/_5dip" />
             </LinearLayout>
 
         </LinearLayout>

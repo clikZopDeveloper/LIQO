@@ -35,7 +35,7 @@ class CustomerInterstedAdapter(var context: Activity,var way:String, var list: L
         holder.tvAdd.visibility = View.VISIBLE*/
 
 
-        holder.tvCatName.text= list[position].categoryName
+        holder.tvCatName.text= list[position].name
       //  holder.tvDate.text= list[position].careatedAt.toString()
 
        // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
@@ -66,17 +66,17 @@ class CustomerInterstedAdapter(var context: Activity,var way:String, var list: L
 
         holder.ivCheck.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                data.add(list[position].categoryId)
+                data.add(list[position].id)
             } else {
-                data.remove(list[position].categoryId)
+                data.remove(list[position].id)
             }
 
             Log.d("zxczxc", data.toString())
-            rvClickListner.clickPos(data, list[position].categoryId)
+            rvClickListner.clickPos(data, list[position].id)
         }
         if (way.equals("Detail")){
              holder.itemView.setOnClickListener {
-           rvClickListner.clickPos(data,list[position].categoryId)
+           rvClickListner.clickPos(data,list[position].id)
        }
         }
 
