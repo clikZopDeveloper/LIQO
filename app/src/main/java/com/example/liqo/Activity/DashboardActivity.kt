@@ -82,6 +82,7 @@ ConnectivityListener.ConnectivityReceiverListener {
         }
 
         handleRcMaster()
+        getLocation()
      //   getLocation()
         if (PrefManager.getString(ApiContants.Role,"").equals("telecaller")){
         apiGetStatus()
@@ -90,7 +91,7 @@ ConnectivityListener.ConnectivityReceiverListener {
         if (SalesApp.isEnableScreenshort==true){
             window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
-        // startService(Intent(this, LocationService::class.java))
+         startService(Intent(this, LocationService::class.java))
         //   binding.appBarMain.appbarLayout.switchDayStart="Day Start"
         binding.appBarMain.appbarLayout.ivLogout.setOnClickListener {
             apiCallLogout()
@@ -102,7 +103,8 @@ ConnectivityListener.ConnectivityReceiverListener {
             binding.appBarMain.appbarLayout.switchDayStart.isChecked = true
             //    Toast.makeText(this@DashboardActivity, "rr", Toast.LENGTH_SHORT).show()
             binding.appBarMain.appbarLayout.switchDayStart.text = "Day Start"
-        } else {
+        }
+        else {
             //     Toast.makeText(this@DashboardActivity, "werwe", Toast.LENGTH_SHORT).show()
             binding.appBarMain.appbarLayout.switchDayStart.isChecked = false
             binding.appBarMain.appbarLayout.switchDayStart.text = "Day End"
@@ -125,6 +127,7 @@ ConnectivityListener.ConnectivityReceiverListener {
                   Toast.LENGTH_SHORT).show()*/
         })
 
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
 
@@ -137,8 +140,6 @@ ConnectivityListener.ConnectivityReceiverListener {
 
         //  setupActionBarWithNavController(navController, appBarConfiguration)
         navBottomView.setupWithNavController(navController)
-
-
 
         llMaster.setOnClickListener(View.OnClickListener {
             if (isActive) {

@@ -390,7 +390,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
 
     override fun onDestroy() {
         super.onDestroy()
-        requireActivity().startService(Intent(requireActivity(), LocationService::class.java))
+        //requireActivity().startService(Intent(requireActivity(), LocationService::class.java))
     }
 
 }
