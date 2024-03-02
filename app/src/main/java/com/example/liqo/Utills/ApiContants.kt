@@ -12,7 +12,8 @@ public class ApiContants {
         var isconnectedtonetwork = false
 
 
-        const val BaseUrl="https://liqo.ecommercekart.in/api/"//Live URL
+        const val BaseUrl="https://liqo.co.in/api/"//Live URL
+     //   const val BaseUrl="https://liqo.ecommercekart.in/api/"//Test URL
         const val ImgBaseUrl="https://liqo.ecommercekart.in/api/"//Image Base URL
 
         const val EmailAddress = "****************"
