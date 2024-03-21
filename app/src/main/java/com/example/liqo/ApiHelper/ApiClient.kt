@@ -45,7 +45,7 @@ class ApiClient {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         httpClient.addInterceptor(interceptor)
-        httpClient.addInterceptor(ChuckerInterceptor(context))
+      //  httpClient.addInterceptor(ChuckerInterceptor(context))
         httpClient.addInterceptor(ConnectivityInterceptor(context))
         httpClient.addInterceptor { chain ->
             val original = chain.request()

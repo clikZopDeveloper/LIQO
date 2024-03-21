@@ -36,6 +36,7 @@ class AllCustomerTypeActivity : AppCompatActivity(), ApiResponseListner,
     var myReceiver: ConnectivityListener? = null
     var activity: Activity = this
     private  var editReamrk : TextInputEditText?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_customer_list)
@@ -51,7 +52,6 @@ class AllCustomerTypeActivity : AppCompatActivity(), ApiResponseListner,
         binding.igToolbar.switchDayStart.visibility = View.GONE
         binding.igToolbar.tvTitle.text = intent.getStringExtra("customerType")?.uppercase()
         intent.getStringExtra("customerType")?.let { apiCustomerTypeList(it) }
-
     }
 
     fun apiCustomerTypeList(custmType: String) {

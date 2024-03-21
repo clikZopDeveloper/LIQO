@@ -271,7 +271,6 @@ class AddCustomerActivity : AppCompatActivity(), ApiResponseListner,
                 //   Toast.makeText(this, allStatusBean.msg, Toast.LENGTH_SHORT).show()
                 if (customrDetailBean.error == false) {
 
-
                     binding.igToolbar.tvTitle.text =
                         "Update " + customrDetailBean.data.customers.customerType
                     binding.editName.setText(customrDetailBean.data.customers.name)

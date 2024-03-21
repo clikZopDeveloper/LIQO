@@ -183,13 +183,13 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
     }
 
     fun handleCustInterestedCat(data: List<CustomerDetailBean.Data.CustomerInterestedCategory>) {
-        if (data.size > 0) {
+        /*if (data.size > 0) {
             binding.rcInterseted.visibility = View.VISIBLE
             binding.tvInterseted.visibility = View.VISIBLE
         } else {
             binding.rcInterseted.visibility = View.GONE
             binding.tvInterseted.visibility = View.GONE
-        }
+        }*/
         binding.rcInterseted.layoutManager = GridLayoutManager(this, 3)
         var mAdapter = CustomerInterstedAdapter(this, "Detail", data, object :
             RvListClickListner {
@@ -216,13 +216,13 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
     }
 
     fun handleCustPurchaseCat(data: List<CustomerDetailBean.Data.CustomerPurchasedCategory>) {
-        if (data.size > 0) {
+     /*   if (data.size > 0) {
             binding.rcPurchase.visibility = View.VISIBLE
             binding.tvPurchase.visibility = View.VISIBLE
         } else {
             binding.rcPurchase.visibility = View.GONE
             binding.tvPurchase.visibility = View.GONE
-        }
+        }*/
         binding.rcPurchase.layoutManager = GridLayoutManager(this, 3)
         var mAdapter = CustomerPurchaseAdapter(this, "Detail", data, object :
             RvListClickListner {
@@ -319,9 +319,7 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
                     handleCustInterestedCat(customrDetailBean.data.customerInterestedCategory)
                     handleLeadCommentList(customrDetailBean.data.leadComments)
                     handleLeadHisList(customrDetailBean.data.leadHistory)
-
                 }
-
             }
 
             if (tag == ApiContants.getConvertInterestedToPurchased) {

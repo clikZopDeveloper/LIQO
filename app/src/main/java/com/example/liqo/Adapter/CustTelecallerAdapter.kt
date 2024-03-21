@@ -36,7 +36,7 @@ class CustTelecallerAdapter(var context: Activity, var list: List<CustmerTelecal
         holder.tvQty.background = RoundView(Color.TRANSPARENT, RoundView.getRadius(20f), true, R.color.orange)
         holder.tvOff.background = RoundView(context.resources.getColor(R.color.orange), RoundView.getRadius(20f))
         holder.tvAdd.visibility = View.VISIBLE*/
-holder.ivEditLead.visibility=View.VISIBLE
+        holder.ivEditLead.visibility=View.VISIBLE
         holder.tvName.text = list[position].name
         holder.tvMobile.text = list[position].phone
         holder.tvWhatsapp.text = list[position].whatsapp
@@ -44,13 +44,13 @@ holder.ivEditLead.visibility=View.VISIBLE
         holder.tvDOB.text = list[position].dob
         holder.tvDOA.text = list[position].dob
 
-        holder.tvCustomerType.text = list[position].customerType.toString()
-        holder.tvDate.text = list[position].createdAt.toString()
-        holder.tvAddress.text = list[position].address.toString()
-        holder.tvCity.text = list[position].city.toString()
-        holder.tvState.text = list[position].state.toString()
+        holder.tvCustomerType.text = list[position].customerType?.toString()
+        holder.tvDate.text = list[position].createdAt?.toString()
+        holder.tvAddress.text = list[position].address?.toString()
+        holder.tvCity.text = list[position].city?.toString()
+        holder.tvState.text = list[position].state?.toString()
         holder.tvRemark.text = list[position].remarks?.toString()
-        holder.tvSource.text = list[position].source.toString()
+        holder.tvSource.text = list[position].source?.toString()
        // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
    /*     Glide.with(context)
@@ -84,6 +84,7 @@ holder.ivEditLead.visibility=View.VISIBLE
                     ,101  )
             }
         }
+
     }
 
     override fun getItemCount(): Int {

@@ -48,11 +48,11 @@ class CustomerListAdapter(
         holder.tvDOB.text = list[position].dob
         holder.tvDOA.text = list[position].dob
 
-        holder.tvCustomerType.text = list[position].customerType.toString()
-        holder.tvDate.text = list[position].createdAt.toString()
-        holder.tvAddress.text = list[position].address.toString()
-        holder.tvCity.text = list[position].city.toString()
-        holder.tvState.text = list[position].state.toString()
+        holder.tvCustomerType.text = list[position].customerType?.toString()
+        holder.tvDate.text = list[position].createdAt?.toString()
+        holder.tvAddress.text = list[position].address?.toString()
+        holder.tvCity.text = list[position].city?.toString()
+        holder.tvState.text = list[position].state?.toString()
         holder.tvRemark.text = list[position].remarks?.toString()
         holder.tvSource.text = list[position].source.toString()
 
