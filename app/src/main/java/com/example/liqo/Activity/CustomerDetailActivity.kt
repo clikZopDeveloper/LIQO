@@ -87,6 +87,7 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         apiClient.getApiPostCall(ApiContants.getCustomerData, params)
 
     }
+
     fun apiSubCategory(catID: String) {
         SalesApp.isAddAccessToken = true
         apiClient = ApiController(activity, this)
@@ -95,6 +96,7 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.getSubCategory, params)
     }
+
     fun apiConvertInterestedToPurchased(cust_id: String, cat_id: String) {
         SalesApp.isAddAccessToken = true
         apiClient = ApiController(this, this)
@@ -103,7 +105,6 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         params["category_id"] = cat_id
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.getConvertInterestedToPurchased, params)
-
     }
 
     fun apiUpdateCategory(cust_id: String, cat_id: String) {
@@ -115,8 +116,8 @@ class CustomerDetailActivity : AppCompatActivity(), ApiResponseListner,
         params["category_type"] = catType
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.getUpdateCustomerCategory, params)
-
     }
+
     fun dialogSelectCat() {
         val builder = AlertDialog.Builder(this,R.style.CustomAlertDialog)
             .create()
